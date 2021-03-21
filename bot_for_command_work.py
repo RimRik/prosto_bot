@@ -41,6 +41,16 @@ def start(update, context):
 
     update.message.reply_text(content, reply_markup = reply)
     
+def Our_graduates(update, context):
+    file = open('Our_graduates.txt','r',encoding="utf-8")
+    text_Our_graduates = file.read()
+    file.close()
+    update.callback_query.message.reply_text(text_Our_graduates)
+    text = 'http://web.kpi.kharkov.ua/kmmm/uk/o_kafedre_ua/nashi-vipuskniki/'
+    update.callback_query.message.reply_text(text)
+    
+    update.message.reply_text()
+    
 ###############################################################
     #Данные о пользователе. Сохраняются в файл users.txt
     user = update.message.from_user
@@ -182,6 +192,7 @@ def main():
     dp.add_handler(CallbackQueryHandler(Project_training,pattern = 'Project_training'))
     dp.add_handler(CallbackQueryHandler(Dual_education,pattern = 'Dual_education'))
     dp.add_handler(CallbackQueryHandler(Employment,pattern = 'Employment'))
+    dp.add_handler(CallbackQueryHandler(Our_graduates,pattern = 'Our_graduates'))
     
     #Если текст будет написан вне команд - вызовется эхобот Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
